@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateFabricatorFoodTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('fabricator_food', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('fabricator_id');
+            $table->unsignedBigInteger('food_id');
+            $table->foreign('fabricator_id')->references('id')->on('fabricators');
+            $table->foreign('food_id')->references('id')->on('food');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('fabricator_food');
+    }
+}
